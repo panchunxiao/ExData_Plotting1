@@ -1,0 +1,11 @@
+rm(list = ls())
+setwd("R_Tutorial/Data_Science_Foundations_using_R_Specialization/ExploratoryDataAnalysis")
+data <- read.csv2("household_power_consumption.txt", sep = ";",)
+household2Days <- subset(data, data$Date=="1/2/2007"|data$Date=="2/2/2007" )
+household2Days[,1] <- as.Date(household2Days[,1], format="%d/%m/%Y")
+household2Days[,2] <- format(household2Days[,2],format="%H:%M:%S")
+household2Days[,3] <- as.numeric(household2Days[,3])
+
+png("plot1.png", width=480, height=480)
+hist(household2Days$Global_active_power,col = "red",main = "Global Active Power", xlab = "Global Active Power(kilowatts)")
+dev.off()
